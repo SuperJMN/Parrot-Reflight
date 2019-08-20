@@ -39,10 +39,4 @@ namespace Reflight.Core.Tests
             matches.Should().BeEquivalentTo(expected);
         }
     }
-
-    public class TestMetadata : IMetadataProperties
-    {
-        public string Duration => nameof(Duration);
-        public string DateEncoded => nameof(DateEncoded);
-    }
 }

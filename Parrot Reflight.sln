@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflight.ParrotApi", "Refli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflight.Core", "Reflight.Core\Reflight.Core.csproj", "{9079A810-EA1D-43F6-AD1C-06A2E0FC7057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflight.Core.Tests", "Reflight.Core.TEsts\Reflight.Core.Tests.csproj", "{71A1737E-3342-4548-9213-2DFD071AEBB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflight.Core.Tests", "Reflight.Core.TEsts\Reflight.Core.Tests.csproj", "{71A1737E-3342-4548-9213-2DFD071AEBB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflight.Universal", "Reflight.Universal\Reflight.Universal.csproj", "{42B45501-9255-4BA7-8AEA-518C3357E7D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflight.Universal.Core", "Reflight.Universal.Core\Reflight.Universal.Core.csproj", "{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +135,26 @@ Global
 		{42B45501-9255-4BA7-8AEA-518C3357E7D8}.Release|x86.ActiveCfg = Release|x86
 		{42B45501-9255-4BA7-8AEA-518C3357E7D8}.Release|x86.Build.0 = Release|x86
 		{42B45501-9255-4BA7-8AEA-518C3357E7D8}.Release|x86.Deploy.0 = Release|x86
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|ARM.Build.0 = Debug|ARM
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|ARM64.Build.0 = Debug|ARM64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|x64.ActiveCfg = Debug|x64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|x64.Build.0 = Debug|x64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|x86.ActiveCfg = Debug|x86
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Debug|x86.Build.0 = Debug|x86
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|ARM.ActiveCfg = Release|ARM
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|ARM.Build.0 = Release|ARM
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|ARM64.ActiveCfg = Release|ARM64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|ARM64.Build.0 = Release|ARM64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|x64.ActiveCfg = Release|x64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|x64.Build.0 = Release|x64
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|x86.ActiveCfg = Release|x86
+		{BFDF9829-A9A9-4A53-93AE-9CD3FD1322BE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

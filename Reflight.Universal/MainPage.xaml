@@ -12,11 +12,55 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     xmlns:model="using:Reflight.ParrotApi.Model"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
     <Grid>
         <Grid.Resources>
+
+            <DataTemplate x:Key="DetailItemTemplate" x:DataType="local:FlightContentViewModel">
+                <controls:DropShadowPanel Color="Gray" OffsetX="16" OffsetY="16" OffsetZ="10" BlurRadius="12">
+                    <StackPanel Padding="16" Background="White" Margin="16">
+
+                        <Grid>
+                            <Image
+                            Source="\Assets\Images/Video.png" />
+                            <Grid>
+                                <Ellipse Fill="White" Height="40" Width="40" />
+                                <Button Command="{Binding PlayCommand}" Background="Transparent"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch">
+                                    <Button.Content>
+                                        <SymbolIcon Symbol="Play">
+                                            <SymbolIcon.Foreground>
+                                                <media:BackdropInvertBrush />
+                                            </SymbolIcon.Foreground>
+                                        </SymbolIcon>
+                                    </Button.Content>
+                                </Button>
+                            </Grid>
+                            <controls:Loading IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
+                                     HorizontalContentAlignment="Stretch">
+                                <Grid>
+                                    <Border Background="White" Opacity="0.7"></Border>
+                                    <ProgressRing Width="50" Height="50" IsActive="{Binding IsBusy}" />
+                                </Grid>
+                            </controls:Loading>
+                        </Grid>
+                        <RichTextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="10">
+
+                            <Paragraph>
+                                <Run FontWeight="Bold" Text="Duration:" />
+                                <Run
+                                Text="{Binding Duration, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:g}'}" />
+                            </Paragraph>
+
+                        </RichTextBlock>
+                    </StackPanel>
+                </controls:DropShadowPanel>
+            </DataTemplate>
+
             <converters:StringFormatConverter x:Key="StringFormatConverter" />
             <DataTemplate x:Key="FlightTemplate">
                 <Grid Margin="10">
@@ -47,13 +91,39 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Command="{Binding LoadFlights}">
-            <SymbolIcon Symbol="Refresh" />
-        </Button>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding LoadFlights}">
+                <SymbolIcon Symbol="Refresh" />
+            </Button>
+            <StackPanel Margin="10" Orientation="Horizontal" DataContext="{Binding Settings}">
+                <TextBox Header="Username" Text="{Binding Username, Mode=TwoWay}" />
+                <PasswordBox Header="Password" Password="{Binding Password, Mode=TwoWay}" />
+            </StackPanel>
+        </StackPanel>
         <controls:MasterDetailsView Grid.Row="1" ItemsSource="{Binding Flights}" 
                                     SelectedItem="{Binding SelectedFlight, Mode=TwoWay}"
                                     ItemTemplate="{StaticResource FlightTemplate}"
-                                    NoSelectionContent="Please, choose a flight" />
+                                    NoSelectionContent="Please, choose a flight">
+
+            <controls:MasterDetailsView.DetailsTemplate>
+                <DataTemplate x:DataType="viewModels:FlightViewModel">
+                    <Grid>
+                        <controls:AdaptiveGridView Margin="20" ItemsSource="{Binding Items}"
+                                                   ItemTemplate="{StaticResource DetailItemTemplate}"
+                                                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                                   SelectionMode="None"
+                                                   DesiredWidth="320">
+                            <controls:AdaptiveGridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="MaxWidth" Value="400" />
+                                </Style>
+                            </controls:AdaptiveGridView.ItemContainerStyle>
+                        </controls:AdaptiveGridView>
+                        <Button Command="{Binding LoadItems}"></Button>
+                    </Grid>
+                </DataTemplate>
+            </controls:MasterDetailsView.DetailsTemplate>
+        </controls:MasterDetailsView>
 
         <controls:Loading Grid.Row="0" Grid.RowSpan="2" IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
                      HorizontalContentAlignment="Stretch">

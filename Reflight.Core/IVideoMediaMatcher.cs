@@ -59,5 +59,10 @@ namespace Reflight.Core
         {
             return subject.Contains(container.Start) && subject.Contains(container.End);
         }
+
+        public static Interval ToInterval(this DateTimeOffset start, TimeSpan span)
+        {
+            return new Interval(start.ToInstant(), start.ToInstant().Plus(span.ToDuration()));
+        }
     }
 }

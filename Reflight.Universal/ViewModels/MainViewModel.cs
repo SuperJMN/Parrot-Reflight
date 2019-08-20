@@ -3,27 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using ReactiveUI;
+using Reflight.Core;
 using Reflight.ParrotApi;
 
 namespace Reflight.Universal.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
+        private readonly IVideoMediaMatcher mediaMatcher;
         private readonly ObservableAsPropertyHelper<List<FlightViewModel>> flights;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
 
-        public MainViewModel(IFlightAcademyClient flightAcademyClient)
+        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IVideoMediaMatcher mediaMatcher, SettingsViewModel settings)
         {
-            LoadFlights = ReactiveCommand.CreateFromObservable(() => Observable(flightAcademyClient));
+            this.mediaMatcher = mediaMatcher;
+            LoadFlights = ReactiveCommand.CreateFromTask(() => LoadFlightsAsync(flightAcademyClientFactory, mediaMatcher));
             flights = LoadFlights.ToProperty(this, x => x.Flights);
             isBusy = LoadFlights.IsExecuting.ToProperty(this, x => x.IsBusy);
+            Settings = settings;
         }
 
-        private static IObservable<List<FlightViewModel>> Observable(IFlightAcademyClient flightAcademyClient)
+        private static async Task<List<FlightViewModel>> LoadFlightsAsync(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory,
+            IVideoMediaMatcher mediaMatcher)
         {
-            return System.Reactive.Linq.Observable.FromAsync(() => flightAcademyClient.GetFlights(1, 15))
-                .Select(x => x.Select(summary => new FlightViewModel(summary)).ToList());
+            var flightAcademyClient = await flightAcademyClientFactory();
+            var observable = Observable.FromAsync(() => flightAcademyClient.GetFlights(1, 15))
+                .Select(x => x.Select(summary => new FlightViewModel(summary, flightAcademyClient, mediaMatcher)).ToList());
+            return await observable;
         }
 
         public List<FlightViewModel> Flights => flights.Value;
@@ -33,5 +41,7 @@ namespace Reflight.Universal.ViewModels
         public FlightViewModel SelectedFlight { get; set; }
 
         public bool IsBusy => isBusy.Value;
+
+        public SettingsViewModel Settings { get; set; }
     }
 }
