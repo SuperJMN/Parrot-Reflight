@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Reflight.ParrotApi
+namespace Reflight.ParrotApi.Model
 {
     public class FlightSummary
     {

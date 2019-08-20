@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Refit;
+using Reflight.ParrotApi.Model;
 
 namespace Reflight.ParrotApi
 {

@@ -13,8 +13,13 @@ namespace Reflight.ParrotApi
 {
     public static class FlightAcademyClient
     {
-        public static async Task<IFlightAcademyClient> Create(string username, string password, Uri uri)
+        public static async Task<IFlightAcademyClient> Create(string username, string password, Uri uri = null)
         {
+            if (uri == null)
+            {
+                uri = new Uri("http://academy.ardrone.com/api3");
+            }
+
             return new FlightAcademyWrapper(await CreateInner(username, password, uri));
         }
 
