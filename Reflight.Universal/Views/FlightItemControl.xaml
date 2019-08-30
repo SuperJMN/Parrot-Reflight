@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="Reflight.Universal.Views.FlightItemControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Reflight.Universal.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:universal="using:Reflight.Universal"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:bitmaps="using:Reflight.Universal.Core.Bitmaps"
+    xmlns:viewModels="using:Reflight.Universal.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:FlightViewModel}">
+
+    <UserControl.Resources>
+
+        <bitmaps:BytesToBitmapConverter x:Key="BytesToBitmapConverter" />
+
+        <DataTemplate x:Key="DetailItemTemplate" x:DataType="universal:FlightContentViewModel">
+            <controls:DropShadowPanel Color="Gray" OffsetX="16" OffsetY="16" OffsetZ="10" BlurRadius="12">
+
+                <StackPanel Padding="16" Background="White" Margin="16">
+
+                    <Grid>
+                        <Image
+                            Source="{Binding Thumbnail, Converter={StaticResource BytesToBitmapConverter}}" />
+                        <Grid>
+                            <Ellipse Fill="White" Height="40" Width="40" />
+                            <Button Command="{Binding PlayCommand}" Background="Transparent"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch">
+                                <Button.Content>
+                                    <SymbolIcon Symbol="Play">
+                                        <SymbolIcon.Foreground>
+                                            <media:BackdropInvertBrush />
+                                        </SymbolIcon.Foreground>
+                                    </SymbolIcon>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <controls:Loading IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
+                                     HorizontalContentAlignment="Stretch">
+                            <Grid>
+                                <Border Background="White" Opacity="0.7"></Border>
+                                <ProgressRing Width="50" Height="50" IsActive="{Binding IsBusy}" />
+                            </Grid>
+                        </controls:Loading>
+                    </Grid>
+                    <RichTextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="10">
+
+                        <Paragraph>
+                            <Run FontWeight="Bold" Text="Duration:" />
+                            <Run
+                                Text="{Binding Duration, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:g}'}" />
+                        </Paragraph>
+
+                    </RichTextBlock>
+                </StackPanel>
+            </controls:DropShadowPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <controls:AdaptiveGridView Margin="20" ItemsSource="{Binding Items}"
+                                   ItemTemplate="{StaticResource DetailItemTemplate}"
+                                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                   SelectionMode="None"
+                                   DesiredWidth="320">
+            <controls:AdaptiveGridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="MaxWidth" Value="400" />
+                </Style>
+            </controls:AdaptiveGridView.ItemContainerStyle>
+        </controls:AdaptiveGridView>
+        <Button Command="{Binding LoadItems}" Content="Load info" />
+
+    </Grid>
+</UserControl>

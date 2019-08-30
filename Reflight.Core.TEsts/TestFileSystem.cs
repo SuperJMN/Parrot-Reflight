@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -15,19 +14,9 @@ namespace Reflight.Core.Tests
             this.fileSystem = fileSystem;
         }
 
-        public IObservable<string> GetFilesFromFolder(string folder)
+        public Task<T> GetMetadata<T>(string path, string property)
         {
-            var filesFromFolder = fileSystem
-                .ToObservable()
-                .Where(x => string.Equals(Path.GetDirectoryName(x.Item1), folder, StringComparison.InvariantCultureIgnoreCase))
-                .Select(x => x.Item1);
-
-            return filesFromFolder;
-        }
-
-        public Task<T> GetMetadata<T>(string file, string property)
-        {
-            var entry = fileSystem.FirstOrDefault(x => x.path == file);
+            var entry = fileSystem.FirstOrDefault(x => x.path == path);
 
             if (entry == default)
             {
@@ -50,5 +39,10 @@ namespace Reflight.Core.Tests
         }
 
         public IMetadataProperties Metadata => new TestMetadata();
+        public IObservable<string> GetAllFiles()
+        {
+            return fileSystem.ToObservable()
+                .Select((x, y) => x.path);
+        }
     }
 }

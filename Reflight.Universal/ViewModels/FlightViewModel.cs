@@ -4,41 +4,45 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Windows.Storage;
 using ReactiveUI;
 using Reflight.Core;
 using Reflight.ParrotApi;
 using Reflight.ParrotApi.Model;
+using Reflight.Universal.Core.Filesystem;
 
 namespace Reflight.Universal.ViewModels
 {
-    public class FlightViewModel
+    public class FlightViewModel : ReactiveObject
     {
         private readonly FlightSummary summary;
-        private readonly IVideoMediaMatcher matcher;
+        private readonly ContentMatcher matcher;
+        private readonly ObservableAsPropertyHelper<IList<FlightContentViewModel>> items;
 
-        public FlightViewModel(FlightSummary summary, IFlightAcademyClient flightAcademyClient, IVideoMediaMatcher matcher)
+        public FlightViewModel(FlightSummary summary, IFlightAcademyClient flightAcademyClient, ContentMatcher matcher)
         {
             this.summary = summary;
             this.matcher = matcher;
 
-            LoadItems = ReactiveCommand.CreateFromTask(Load);
+            LoadItems = ReactiveCommand.CreateFromObservable(() => Load().ToList());
+            LoadItems.ThrownExceptions.Subscribe(x => { });
+            items = LoadItems.ToProperty(this, x => x.Items);
         }
 
-        public ReactiveCommand<Unit, IEnumerable<FlightContentPart>> LoadItems { get; }
+        public ReactiveCommand<Unit, IList<FlightContentViewModel>> LoadItems { get; }
 
-        private async Task<IEnumerable<FlightContentPart>> Load()
+        private IObservable<FlightContentViewModel> Load()
         {
-            var items = await matcher.Lookup(summary.Date.ToInterval(summary.TotalRunTime), new List<string> {"E:\\Local\\Parrot\\Anafi", "E:\\Local\\Parrot\\Disco"}).ToList();
-
-            return items.Select(FlightContentPart.FromFile);
+            return matcher.Match(summary.Date.ToInterval(summary.TotalRunTime))
+                .SelectMany(FlightContentViewModel.Create);
         }
 
         public DateTimeOffset RecordedDate => summary.Date;
 
         public TimeSpan TotalRunTime => summary.TotalRunTime;
 
-        public List<FlightContentPart> Items { get; set; }
+        public IList<FlightContentViewModel> Items => items.Value;
 
-        public FlightContentPart SelectedItem { get; set; }
+        public StorageFile SelectedItem { get; set; }
     }
 }

@@ -1,4 +1,10 @@
-﻿using Windows.Storage;
+﻿using System;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
 using ReactiveUI;
 using Reflight.Universal.Core;
 
@@ -11,7 +17,12 @@ namespace Reflight.Universal.ViewModels
         public SettingsViewModel()
         {
             settings = new SettingsStore(this, ApplicationData.Current.RoamingSettings);
+            BrowseFolderCommand =
+                ReactiveCommand.CreateFromObservable(() => Observable.FromAsync(BrowseFolder).Where(x => x != null));
+            BrowseFolderCommand.Subscribe(folder => StorageApplicationPermissions.FutureAccessList.Add(folder));
         }
+
+        public ReactiveCommand<Unit, StorageFolder> BrowseFolderCommand { get; }
 
         public string Username
         {
@@ -31,6 +42,17 @@ namespace Reflight.Universal.ViewModels
                 settings.Set(value);
                 this.RaisePropertyChanged();
             }
+        }
+
+        private async Task<StorageFolder> BrowseFolder()
+        {
+            var picker = new FolderPicker
+            {
+                CommitButtonText = "Select",
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+            picker.FileTypeFilter.Add("*"); 
+            return await picker.PickSingleFolderAsync();
         }
     }
 }

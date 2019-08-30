@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using Reflight.Core;
 using Reflight.ParrotApi;
+using Reflight.Universal.Core.Filesystem;
 
 namespace Reflight.Universal.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
-        private readonly IVideoMediaMatcher mediaMatcher;
+        private readonly ContentMatcher mediaMatcher;
         private readonly ObservableAsPropertyHelper<List<FlightViewModel>> flights;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
 
-        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IVideoMediaMatcher mediaMatcher, SettingsViewModel settings)
+        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, ContentMatcher mediaMatcher, SettingsViewModel settings)
         {
             this.mediaMatcher = mediaMatcher;
             LoadFlights = ReactiveCommand.CreateFromTask(() => LoadFlightsAsync(flightAcademyClientFactory, mediaMatcher));
@@ -26,10 +27,10 @@ namespace Reflight.Universal.ViewModels
         }
 
         private static async Task<List<FlightViewModel>> LoadFlightsAsync(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory,
-            IVideoMediaMatcher mediaMatcher)
+            ContentMatcher mediaMatcher)
         {
             var flightAcademyClient = await flightAcademyClientFactory();
-            var observable = Observable.FromAsync(() => flightAcademyClient.GetFlights(1, 15))
+            var observable = Observable.FromAsync(() => flightAcademyClient.GetFlights(0, 1500))
                 .Select(x => x.Select(summary => new FlightViewModel(summary, flightAcademyClient, mediaMatcher)).ToList());
             return await observable;
         }

@@ -5,14 +5,8 @@ namespace Reflight.Core
 {
     public interface IFileSystem
     {
-        IObservable<string> GetFilesFromFolder(string folder);
-        Task<T> GetMetadata<T>(string file, string property);
+        Task<T> GetMetadata<T>(string path, string property);
         IMetadataProperties Metadata { get; }
-    }
-
-    public interface IMetadataProperties
-    {
-        string Duration { get; }
-        string DateEncoded { get; }
+        IObservable<string> GetAllFiles();
     }
 }

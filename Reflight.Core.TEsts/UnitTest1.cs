@@ -27,7 +27,7 @@ namespace Reflight.Core.Tests
             var start = new DateTimeOffset(2000, 1, 1, 10, 0, 0, 0, TimeSpan.Zero);
             var end = new DateTimeOffset(2000, 1, 1, 14, 1, 0, 0, TimeSpan.Zero);
             var interval = new Interval(start.ToInstant(), end.ToInstant());
-            var matches = await sut.Lookup(interval, new List<string> { "c:\\Folder1", "c:\\Folder2" }).ToList();
+            var matches = await sut.RecordingsBetween(interval).ToList();
 
             var expected = new[]
             {

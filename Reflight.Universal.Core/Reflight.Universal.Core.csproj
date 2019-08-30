@@ -120,16 +120,33 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bitmaps\BitmapConversion.cs" />
+    <Compile Include="Bitmaps\BytesToBitmapConverter.cs" />
+    <Compile Include="Bitmaps\StorageFileToBitmapConverter.cs" />
     <Compile Include="DefaultSettingValueAttribute.cs" />
+    <Compile Include="Filesystem\ContentMatcher.cs" />
+    <Compile Include="Filesystem\UwpFileSystem.cs" />
+    <Compile Include="Filesystem\UwpMetadata.cs" />
     <Compile Include="ISettingsStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsStore.cs" />
+    <Compile Include="StorageFileMixin.cs" />
+    <Compile Include="StreamMixin.cs" />
     <EmbeddedResource Include="Properties\Reflight.Universal.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
     </PackageReference>
+    <PackageReference Include="NodaTime">
+      <Version>2.4.6</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Reflight.Core\Reflight.Core.csproj">
+      <Project>{9079A810-EA1D-43F6-AD1C-06A2E0FC7057}</Project>
+      <Name>Reflight.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
