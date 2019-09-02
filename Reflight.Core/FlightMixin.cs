@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using GeoCoordinatePortable;
-using Reflight.ParrotApi;
+using Parrot.FlightAcademy.Model;
 
 namespace Reflight.Core
 {

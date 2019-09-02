@@ -6,7 +6,7 @@ using NodaTime.Extensions;
 
 namespace Reflight.Core
 {
-    public class MediaStore : IVideoMediaMatcher
+    public class MediaStore : IMediaStore
     {
         private readonly IFileSystem fileSystem;
 
@@ -15,10 +15,10 @@ namespace Reflight.Core
             this.fileSystem = fileSystem;
         }
 
-        public IObservable<string> RecordingsBetween(Interval interval)
+        public IObservable<IFile> RecordingsBetween(Interval interval)
         {
             var inside = fileSystem.GetAllFiles()
-                .SelectMany(async fileName => new { Interval = await GetInterval(fileName), File = fileName })
+                .SelectMany(async file => new { Interval = await GetInterval(file.Path), File = file })
                 .Where(x => interval.Contains(x.Interval))
                 .Select(x => x.File);
 

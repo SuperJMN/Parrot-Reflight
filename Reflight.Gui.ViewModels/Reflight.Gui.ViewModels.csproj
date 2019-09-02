@@ -3,16 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="DynamicData" Version="6.13.1" />
-    <PackageReference Include="GeoCoordinate.NetCore" Version="1.0.0.1" />
-    <PackageReference Include="NodaTime" Version="2.4.6" />
-    <PackageReference Include="System.Reactive" Version="4.1.6" />
+    <PackageReference Include="ReactiveUI" Version="9.22.1" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Parrot.FlightAcademy\Parrot.FlightAcademy.csproj" />
+    <ProjectReference Include="..\Reflight.Core\Reflight.Core.csproj" />
     <ProjectReference Include="..\Reflight.ParrotApi\Reflight.ParrotApi.csproj" />
   </ItemGroup>
 

@@ -7,6 +7,7 @@ namespace Reflight.Core
     {
         Task<T> GetMetadata<T>(string path, string property);
         IMetadataProperties Metadata { get; }
-        IObservable<string> GetAllFiles();
+        IObservable<IFile> GetAllFiles();
+        Task<IFile> GetFile(string path);
     }
 }
