@@ -1,0 +1,62 @@
+﻿<UserControl
+    x:Class="Reflight.Gui.Views.FlightBrowser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Reflight.Gui.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:viewModels="using:Reflight.Gui.ViewModels"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:views="using:Reflight.Universal.Views"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+
+    <Grid>
+        <controls:MasterDetailsView ItemsSource="{Binding Flights}"
+                                    SelectedItem="{Binding SelectedFlight, Mode=TwoWay}"
+                                    NoSelectionContent="Please, choose a flight">
+
+            <controls:MasterDetailsView.MasterHeader>
+                <StackPanel>
+                    <TextBlock Text="Flights" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <Button Command="{Binding LoadFlights}">
+                        <SymbolIcon Symbol="Refresh" />
+                    </Button>
+                </StackPanel>
+            </controls:MasterDetailsView.MasterHeader>
+            <controls:MasterDetailsView.DetailsTemplate>
+                <DataTemplate x:DataType="viewModels:FlightViewModel">
+                    <views:FlightItemControl/>
+                </DataTemplate>
+            </controls:MasterDetailsView.DetailsTemplate>
+            <controls:MasterDetailsView.ItemTemplate>
+                <DataTemplate>
+                    <views:FlightControl />
+                </DataTemplate>
+            </controls:MasterDetailsView.ItemTemplate>
+        </controls:MasterDetailsView>
+
+        <controls:Loading Grid.Row="0" IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch">
+            <Grid>
+                <Border>
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:Blur Value="1"
+                                        Duration="1000"
+                                        Delay="0"
+                                        EasingType="Linear"
+                                        EasingMode="EaseOut"
+                                        AutomaticallyStart="True"/>
+                    </interactivity:Interaction.Behaviors>
+                </Border>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold" Text="Loading data..." HorizontalAlignment="Center" Margin="20" />
+                    <ProgressRing Width="150" Height="150" IsActive="{Binding IsBusy}" />
+                </StackPanel>
+            </Grid>
+        </controls:Loading>
+    </Grid>
+</UserControl>

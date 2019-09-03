@@ -13,7 +13,6 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Parrot.FlightAcademy\Parrot.FlightAcademy.csproj" />
-    <ProjectReference Include="..\Reflight.ParrotApi\Reflight.ParrotApi.csproj" />
   </ItemGroup>
 
 </Project>

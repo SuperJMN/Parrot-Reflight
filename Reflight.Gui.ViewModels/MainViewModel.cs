@@ -18,6 +18,7 @@ namespace Reflight.Gui.ViewModels
         public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IMediaStore mediaStore)
         {
             LoadFlights = ReactiveCommand.CreateFromTask(() => LoadFlightsAsync(flightAcademyClientFactory, mediaStore));
+            LoadFlights.ThrownExceptions.Subscribe(exception => { });
             flights = LoadFlights.ToProperty(this, x => x.Flights);
             isBusy = LoadFlights.IsExecuting.ToProperty(this, x => x.IsBusy);
         }

@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <views:SettingsControl />
+        <views:Settings />
+        <views:FlightBrowser Grid.Row="1" />
     </Grid>
 </Page>

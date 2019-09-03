@@ -43,14 +43,14 @@ namespace Parrot.FlightAcademy
 
             return RestService.For<IFlightAcademyClient>(httpClient, new RefitSettings
             {
-                JsonSerializerSettings = new JsonSerializerSettings
+                ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
                 {
                     Converters =
                     {
                         new TimeSpanJsonConverter(),
                         new JsonDateTimeOffsetConverter()
                     }
-                }
+                })
             });
         }
 
