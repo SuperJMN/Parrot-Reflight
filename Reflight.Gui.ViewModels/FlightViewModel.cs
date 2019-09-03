@@ -24,6 +24,8 @@ namespace Reflight.Gui.ViewModels
             items = LoadItems.ToProperty(this, x => x.Items);
         }
 
+        public DroneModel Model => DroneModel.FromProductId(summary.ProductId);
+
         public ReactiveCommand<Unit, IList<FlightContentViewModel>> LoadItems { get; }
 
         private IObservable<FlightContentViewModel> Load()

@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Container.cs" />
+    <Compile Include="ViewSupport\DroneModelConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Drones\Disco.png" />
+    <Content Include="Images\Drones\Anafi.png" />
     <Content Include="Images\Video.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
