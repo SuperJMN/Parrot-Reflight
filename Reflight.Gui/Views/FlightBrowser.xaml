@@ -20,7 +20,7 @@
                                     NoSelectionContent="Please, choose a flight">
 
             <controls:MasterDetailsView.MasterHeader>
-                <StackPanel>
+                <StackPanel Spacing="10">
                     <TextBlock Text="Flights" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
                     <Button Command="{Binding LoadFlights}">
                         <SymbolIcon Symbol="Refresh" />
