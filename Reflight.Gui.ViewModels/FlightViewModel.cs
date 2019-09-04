@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Parrot.FlightAcademy;
 using Parrot.FlightAcademy.Model;
 using ReactiveUI;
 using Reflight.Core;
@@ -15,25 +16,20 @@ namespace Reflight.Gui.ViewModels
         private readonly ObservableAsPropertyHelper<IList<FlightContentViewModel>> items;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
 
-        public FlightViewModel(FlightSummary summary, IMediaStore matcher)
+        public FlightViewModel(FlightSummary summary, IMediaStore matcher,
+            Func<Task<IFlightAcademyClient>> clientFactory)
         {
             this.summary = summary;
 
             LoadItems = ReactiveCommand.CreateFromObservable(() => matcher
                 .RecordingsBetween(this.summary.Date.ToInterval(this.summary.TotalRunTime))
-                .SelectMany(FlightContentViewModel.Create).ToList());
+                .SelectMany(file => FlightContentViewModel.Create(summary.Id, file, clientFactory)).ToList());
             items = LoadItems.ToProperty(this, x => x.Items);
             isBusy = LoadItems.IsExecuting.ToProperty(this, x => x.IsBusy);
-            Play = ReactiveCommand.CreateFromTask((FlightContentViewModel e) => PlayVideo(e));
-            Play.Subscribe(unit => { });
+            Play = ReactiveCommand.CreateFromObservable((FlightContentViewModel e) => e.PlayCommand.Execute());
         }
 
-        public ReactiveCommand<FlightContentViewModel, Unit> Play { get; }
-
-        private Task<Unit> PlayVideo(FlightContentViewModel flight)
-        {
-            return Task.FromResult(Unit.Default);
-        }
+        public ReactiveCommand<FlightContentViewModel, SimulationUnit> Play { get; }
 
         public DroneModel Model => DroneModel.FromProductId(summary.ProductId);
 

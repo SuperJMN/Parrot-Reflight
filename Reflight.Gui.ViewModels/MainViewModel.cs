@@ -28,7 +28,7 @@ namespace Reflight.Gui.ViewModels
         {
             var flightAcademyClient = await flightAcademyClientFactory();
             var observable = Observable.FromAsync(() => flightAcademyClient.GetFlights(0, 1500))
-                .Select(x => x.Select(summary => new FlightViewModel(summary, mediaMatcher)).ToList());
+                .Select(x => x.Select(summary => new FlightViewModel(summary, mediaMatcher, flightAcademyClientFactory)).ToList());
             return await observable;
         }
 
