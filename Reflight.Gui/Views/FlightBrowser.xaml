@@ -23,7 +23,10 @@
                 <StackPanel Spacing="10">
                     <TextBlock Text="Flights" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
                     <Button Command="{Binding LoadFlights}">
-                        <SymbolIcon Symbol="Refresh" />
+                        <controls:DockPanel>
+                            <TextBlock Text="Load flights" controls:DockPanel.Dock="Right" Margin="10 0" />
+                            <SymbolIcon Symbol="Refresh" />
+                        </controls:DockPanel>
                     </Button>
                 </StackPanel>
             </controls:MasterDetailsView.MasterHeader>

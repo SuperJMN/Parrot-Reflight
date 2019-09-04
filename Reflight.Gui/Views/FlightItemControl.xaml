@@ -8,6 +8,8 @@
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:viewModels1="using:Reflight.Gui.ViewModels"
     xmlns:bitmaps="using:Zafiro.Uwp.Core.Bitmaps"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels1:FlightViewModel}">
@@ -17,46 +19,35 @@
         <bitmaps:BytesToBitmapConverter x:Key="BytesToBitmapConverter" />
 
         <DataTemplate x:Key="DetailItemTemplate" x:DataType="viewModels1:FlightContentViewModel">
-            <controls:DropShadowPanel Color="Gray" OffsetX="16" OffsetY="16" OffsetZ="10" BlurRadius="12">
 
-                <StackPanel Padding="16" Background="White" Margin="16">
-
+            <Grid>
+                <StackPanel>
                     <Grid>
                         <Image
                             Source="{Binding Thumbnail, Converter={StaticResource BytesToBitmapConverter}}" />
-                        <Grid>
-                            <Ellipse Fill="White" Height="40" Width="40" />
-                            <Button Command="{Binding PlayCommand}" Background="Transparent"
-                                    VerticalAlignment="Stretch"
-                                    HorizontalAlignment="Stretch">
-                                <Button.Content>
-                                    <SymbolIcon Symbol="Play">
-                                        <SymbolIcon.Foreground>
-                                            <media:BackdropInvertBrush />
-                                        </SymbolIcon.Foreground>
-                                    </SymbolIcon>
-                                </Button.Content>
-                            </Button>
-                        </Grid>
-                        <controls:Loading IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
-                                     HorizontalContentAlignment="Stretch">
-                            <Grid>
-                                <Border Background="White" Opacity="0.7"></Border>
-                                <ProgressRing Width="50" Height="50" IsActive="{Binding IsBusy}" />
-                            </Grid>
-                        </controls:Loading>
-                    </Grid>
-                    <RichTextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                        <Ellipse Fill="White" Height="40" Width="40" />
+                        <SymbolIcon Symbol="Play">
+                            <SymbolIcon.Foreground>
+                                <media:BackdropInvertBrush />
+                            </SymbolIcon.Foreground>
+                        </SymbolIcon>
+                    </Grid> <RichTextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="10">
 
                         <Paragraph>
-                            <Run FontWeight="Bold" Text="Duration:" />
-                            <Run
-                                Text="{Binding Duration, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:g}'}" />
+                            <Run FontWeight="Bold"  Text="{Binding Duration, Converter={StaticResource HumanizeDurationConverter}}" />
                         </Paragraph>
 
                     </RichTextBlock>
                 </StackPanel>
-            </controls:DropShadowPanel>
+                <controls:Loading IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
+                                  HorizontalContentAlignment="Stretch">
+                    <Grid>
+                        <Border Background="White" Opacity="0.7"></Border>
+                        <ProgressRing Width="50" Height="50" IsActive="{Binding IsBusy}" />
+                    </Grid>
+                </controls:Loading>
+            </Grid>
+
         </DataTemplate>
 
     </UserControl.Resources>
@@ -66,14 +57,43 @@
                                    ItemTemplate="{StaticResource DetailItemTemplate}"
                                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                                    SelectionMode="None"
+                                   IsItemClickEnabled="True"
+                                   ItemClickCommand="{Binding Play}"
                                    DesiredWidth="320">
+            <controls:AdaptiveGridView.Header>
+                <Button Command="{Binding LoadItems}" Margin="0 10">
+                    <Button.Content>
+                        <controls:DockPanel>
+                            <TextBlock Text="Match videos" controls:DockPanel.Dock="Right" Margin="10,0"></TextBlock>
+                            <SymbolIcon Symbol="Find" />
+                        </controls:DockPanel>
+                    </Button.Content>
+                </Button>
+            </controls:AdaptiveGridView.Header>
             <controls:AdaptiveGridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="MaxWidth" Value="400" />
                 </Style>
             </controls:AdaptiveGridView.ItemContainerStyle>
         </controls:AdaptiveGridView>
-        <Button Command="{Binding LoadItems}" Content="Load info" />
-
+        <controls:Loading Grid.Row="0" IsLoading="{Binding IsBusy}" VerticalContentAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch">
+            <Grid>
+                <Border>
+                    <interactivity:Interaction.Behaviors>
+                        <behaviors:Blur Value="1"
+                                        Duration="1000"
+                                        Delay="0"
+                                        EasingType="Linear"
+                                        EasingMode="EaseOut"
+                                        AutomaticallyStart="True"/>
+                    </interactivity:Interaction.Behaviors>
+                </Border>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold" Text="Loading data..." HorizontalAlignment="Center" Margin="20" />
+                    <ProgressRing Width="150" Height="150" IsActive="{Binding IsBusy}" />
+                </StackPanel>
+            </Grid>
+        </controls:Loading>
     </Grid>
 </UserControl>

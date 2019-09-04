@@ -1,17 +1,16 @@
 using System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Humanizer;
 
-namespace Reflight.Gui
+namespace Reflight.Gui.ViewSupport
 {
-    public class HumanizeDateConverter : IValueConverter
+    public class HumanizeTimeSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is DateTimeOffset d)
+            if (value is TimeSpan ts)
             {
-                return d.Humanize();
+                return ts.Humanize();
             }
 
             return null;

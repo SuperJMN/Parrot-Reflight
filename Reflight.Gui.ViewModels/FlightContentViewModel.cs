@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NodaTime;
 using ReactiveUI;
 using Reflight.Core;
 
@@ -20,11 +21,13 @@ namespace Reflight.Gui.ViewModels
 
         public bool IsBusy { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        public Duration? Duration { get; set; }
 
         public static async Task<FlightContentViewModel> Create(IFile file)
         {
-            return new FlightContentViewModel(new byte[0]);
+            var flightContentViewModel = new FlightContentViewModel(await file.GetThumbnail());
+            flightContentViewModel.Duration = await file.GetDuration();
+            return flightContentViewModel;
         }
     }
 }

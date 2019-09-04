@@ -11,14 +11,7 @@ namespace Zafiro.Uwp.Core.Filesystem
 {
     public class UwpFileSystem : IFileSystem
     {
-        public async Task<T> GetMetadata<T>(string path, string property)
-        {
-            var file = await StorageFile.GetFileFromPathAsync(path);
-            return await file.GetProperty<T>(property);
-        }
-
-        public IMetadataProperties Metadata => new UwpMetadata();
-        IObservable<Reflight.Core.IFile> IFileSystem.GetAllFiles()
+        IObservable<IFile> IFileSystem.GetAllFiles()
         {
             var storageItemAccessList = StorageApplicationPermissions.FutureAccessList;
             var files = storageItemAccessList.Entries.Select(entry => entry.Token).ToObservable()
@@ -27,12 +20,12 @@ namespace Zafiro.Uwp.Core.Filesystem
                 .SelectMany(x => x)
                 .Select(x => new UwpStorageFile(x));
 
-            return files;        }
+            return files;
+        }
 
         public async Task<IFile> GetFile(string path)
         {
             return new UwpStorageFile(await StorageFile.GetFileFromPathAsync(path));
         }
-
     }
 }
