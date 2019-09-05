@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29123.89
+VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflight.Core", "Reflight.Core\Reflight.Core.csproj", "{9079A810-EA1D-43F6-AD1C-06A2E0FC7057}"
 EndProject
@@ -138,6 +138,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E89C8E36-27F8-40C2-BD69-D85BC638469F}
+		SolutionGuid = {F4C4FC38-BD7A-4FAC-AF00-2986895FE53B}
 	EndGlobalSection
 EndGlobal

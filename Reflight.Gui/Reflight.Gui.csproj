@@ -120,28 +120,41 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Container.cs" />
+    <Compile Include="Navigation.cs" />
+    <Compile Include="NavigationFrameMessage.cs" />
+    <Compile Include="ViewSupport\Dashboard.cs" />
     <Compile Include="ViewSupport\HumanizeDateConverter.cs" />
     <Compile Include="ViewSupport\HumanizeDurationConverter.cs" />
     <Compile Include="ViewSupport\HumanizeTimeSpanConverter.cs" />
     <Compile Include="ViewSupport\DroneModelConverter.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="ViewSupport\ISimulationViewModel.cs" />
+    <Compile Include="ViewSupport\PresentationOptions.cs" />
+    <Compile Include="ViewSupport\SimulationViewModelToDataTemplateConverter.cs" />
+    <Compile Include="ViewSupport\VideoSizeConverter.cs" />
+    <Compile Include="Views\Controls\FlightViewerControl.xaml.cs">
+      <DependentUpon>FlightViewerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\FlightBrowser.xaml.cs">
+    <Compile Include="Views\Controls\FlightBrowser.xaml.cs">
       <DependentUpon>FlightBrowser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightControl.xaml.cs">
+    <Compile Include="Views\Controls\FlightControl.xaml.cs">
       <DependentUpon>FlightControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightItemControl.xaml.cs">
+    <Compile Include="Views\Controls\FlightItemControl.xaml.cs">
       <DependentUpon>FlightItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Settings.xaml.cs">
+    <Compile Include="Views\Controls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsControl.xaml.cs">
+    <Compile Include="Views\Controls\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SimulationPage.xaml.cs">
+      <DependentUpon>SimulationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -167,29 +180,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\FlightBrowser.xaml">
+    <Page Include="Views\Controls\FlightViewerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FlightControl.xaml">
+    <Page Include="Views\Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\FlightItemControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Settings.xaml">
+    <Page Include="Views\Controls\FlightBrowser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsControl.xaml">
+    <Page Include="Views\Controls\FlightControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\FlightItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Controls\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\SimulationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,12 @@
         <viewSupport:HumanizeDurationConverter x:Key="HumanizeDurationConverter" />
         <viewSupport:HumanizeTimeSpanConverter x:Key="HumanizeTimeSpanConverter" />
 
+        <viewSupport:SimulationViewModelToDataTemplateConverter x:Key="TemplateNameToTemplateConverter">
+            <!--<viewSupport:SimulationViewModelToDataTemplateConverter.ResourceDictionary>
+                <ResourceDictionary Source="Views/VirtualDashboards.xaml" />
+            </viewSupport:SimulationViewModelToDataTemplateConverter.ResourceDictionary>-->
+        </viewSupport:SimulationViewModelToDataTemplateConverter>
+
     </Application.Resources>
 
 </Application>

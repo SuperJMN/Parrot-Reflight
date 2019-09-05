@@ -12,29 +12,34 @@ namespace Reflight.Gui.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
-        private readonly ObservableAsPropertyHelper<List<FlightViewModel>> flights;
+        private readonly IViewModelFactory viewModelFactory;
+        private readonly ObservableAsPropertyHelper<IList<FlightViewModel>> flights;
         private readonly ObservableAsPropertyHelper<bool> isBusy;
 
-        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IMediaStore mediaStore)
+        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IMediaStore mediaStore, IViewModelFactory viewModelFactory)
         {
+            this.viewModelFactory = viewModelFactory;
             LoadFlights = ReactiveCommand.CreateFromTask(() => LoadFlightsAsync(flightAcademyClientFactory, mediaStore));
             LoadFlights.ThrownExceptions.Subscribe(exception => { });
             flights = LoadFlights.ToProperty(this, x => x.Flights);
             isBusy = LoadFlights.IsExecuting.ToProperty(this, x => x.IsBusy);
         }
 
-        private static async Task<List<FlightViewModel>> LoadFlightsAsync(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory,
+        private async Task<IList<FlightViewModel>> LoadFlightsAsync(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory,
             IMediaStore mediaMatcher)
         {
             var flightAcademyClient = await flightAcademyClientFactory();
-            var observable = Observable.FromAsync(() => flightAcademyClient.GetFlights(0, 1500))
-                .Select(x => x.Select(summary => new FlightViewModel(summary, mediaMatcher, flightAcademyClientFactory)).ToList());
-            return await observable;
+            var observable = Observable
+                .FromAsync(() => flightAcademyClient.GetFlights(0, 1500))
+                .Select(x => x.ToObservable().SelectMany(summary => viewModelFactory.CreateFlightViewModel(summary)).ToList());
+            var observable1 = await observable;
+            var flightViewModels = await observable1;
+            return flightViewModels;
         }
 
-        public List<FlightViewModel> Flights => flights.Value;
+        public IList<FlightViewModel> Flights => flights.Value;
 
-        public ReactiveCommand<Unit, List<FlightViewModel>> LoadFlights { get; }
+        public ReactiveCommand<Unit, IList<FlightViewModel>> LoadFlights { get; }
 
         public FlightViewModel SelectedFlight { get; set; }
 
