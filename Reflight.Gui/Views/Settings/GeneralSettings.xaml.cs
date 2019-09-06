@@ -5,9 +5,9 @@ using Reflight.Gui.ViewModels;
 
 namespace Reflight.Gui.Views.Controls
 {
-    public sealed partial class SettingsControl : UserControl
+    public sealed partial class GeneralSettings : UserControl
     {
-        public SettingsControl()
+        public GeneralSettings()
         {
             this.InitializeComponent();
             this.DataContext = Container.Current.Locate<SettingsViewModel>();

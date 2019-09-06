@@ -26,7 +26,7 @@ namespace Reflight.Gui.ViewModels
             Play = ReactiveCommand.CreateFromObservable((FlightContentViewModel e) => e.PlayCommand.Execute());
         }
 
-        public ReactiveCommand<FlightContentViewModel, SimulationUnit> Play { get; }
+        public ReactiveCommand<FlightContentViewModel, Simulation> Play { get; }
 
         public DroneModel Model => DroneModel.FromProductId(summary.ProductId);
 

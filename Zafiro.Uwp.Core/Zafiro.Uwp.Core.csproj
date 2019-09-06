@@ -123,10 +123,16 @@
     <Compile Include="Bitmaps\BitmapConversion.cs" />
     <Compile Include="Bitmaps\BytesToBitmapConverter.cs" />
     <Compile Include="Bitmaps\StorageFileToBitmapConverter.cs" />
+    <Compile Include="Controls\AnimatedRadialGauge.cs" />
+    <Compile Include="Controls\ControlHelpers.cs" />
     <Compile Include="DefaultSettingValueAttribute.cs" />
     <Compile Include="Filesystem\UwpFileSystem.cs" />
     <Compile Include="Filesystem\UwpMetadata.cs" />
     <Compile Include="Filesystem\UwpStorageFile.cs" />
+    <Compile Include="Media\IMediaPlayerAdapterInjector.cs" />
+    <Compile Include="Media\InjectMediaPlayerBehavior.cs" />
+    <Compile Include="Media\UwpMediaPlayer.cs" />
+    <Compile Include="Media\SetMediaSourceBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UwpSettingsStore.cs" />
     <Compile Include="StorageFileMixin.cs" />
@@ -138,6 +144,12 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
     <PackageReference Include="NodaTime">
       <Version>2.4.6</Version>
     </PackageReference>
@@ -146,6 +158,10 @@
     <ProjectReference Include="..\Reflight.Core\Reflight.Core.csproj">
       <Project>{9079A810-EA1D-43F6-AD1C-06A2E0FC7057}</Project>
       <Name>Reflight.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reflight.Gui.ViewModels\Reflight.Gui.ViewModels.csproj">
+      <Project>{F8B6F74C-8ED1-4B10-9B27-A672F4B94025}</Project>
+      <Name>Reflight.Gui.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

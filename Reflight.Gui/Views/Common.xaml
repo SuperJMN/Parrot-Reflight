@@ -1,0 +1,10 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Thickness x:Key="VerticalMargin">0,10</Thickness>
+    <x:Double x:Key="Spacing">10</x:Double>
+    <Thickness x:Key="StandardSeparation">20,10</Thickness>
+    <Thickness x:Key="HorizontalMargin">10,0</Thickness>
+
+</ResourceDictionary>

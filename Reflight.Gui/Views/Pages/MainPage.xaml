@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Reflight.Gui.Views.Controls"
     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:settings="using:Reflight.Gui.Views.Settings"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -15,7 +16,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <controls1:Expander Header="Settings">
-            <controls:Settings />
+            <settings:Settings />
         </controls1:Expander>
         <controls:FlightBrowser Grid.Row="1" />
     </Grid>

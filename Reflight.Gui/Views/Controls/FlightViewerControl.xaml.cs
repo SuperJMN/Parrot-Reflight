@@ -12,16 +12,31 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Reflight.Gui.ViewModels;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Reflight.Gui.Views.Controls
 {
-    public sealed partial class FlightViewerControl : UserControl
+    public sealed partial class FlightViewerControl
     {
+        public static readonly DependencyProperty FlightReplayViewModelProperty = DependencyProperty.Register("FlightReplayViewModel", typeof(SimulationViewModel), typeof(FlightViewerControl), new PropertyMetadata(default(SimulationViewModel), OnReplayChanged));
+
+        private static void OnReplayChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var source = (FlightViewerControl) d;
+            
+        }
+
         public FlightViewerControl()
         {
             this.InitializeComponent();
+        }
+
+        public FlightReplayViewModel FlightReplayViewModel
+        {
+            get { return (FlightReplayViewModel) GetValue(FlightReplayViewModelProperty); }
+            set { SetValue(FlightReplayViewModelProperty, value); }
         }
     }
 }

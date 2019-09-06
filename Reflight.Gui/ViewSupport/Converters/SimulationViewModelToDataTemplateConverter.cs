@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Reflight.Gui.ViewModels;
 
 namespace Reflight.Gui.ViewSupport
 {

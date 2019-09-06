@@ -7,6 +7,7 @@ using NodaTime;
 using Parrot.FlightAcademy;
 using ReactiveUI;
 using Reflight.Core;
+using Reflight.Gui.ViewModels.Dashboards;
 
 namespace Reflight.Gui.ViewModels
 {
@@ -14,26 +15,31 @@ namespace Reflight.Gui.ViewModels
     {
         private readonly ObservableAsPropertyHelper<bool> isBusy;
         public byte[] Thumbnail { get; }
-        public string Path { get; }
+        public IFile Source { get; }
 
-        public FlightContentViewModel(int flightId, byte[] thumbnail, string path,
-            Func<Task<IFlightAcademyClient>> clientFactory, INavigation navigation)
+        public FlightContentViewModel(int flightId, byte[] thumbnail, IFile source,
+            Func<Task<IFlightAcademyClient>> clientFactory, INavigation navigation, ISettings settings)
         {
             Thumbnail = thumbnail;
-            Path = path;
+            Source = source;
             PlayCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 var flightDetails = await (await clientFactory()).GetFlight(flightId);
                 var flight = flightDetails.ToFlight();
-                var simulationUnit = new SimulationUnit(flight, path);
-                await navigation.Go<SimulationViewModel>(new { simulationUnit = simulationUnit });
+                var video = await Video.Load(source);
+                var simulationUnit = new Simulation(video, flight, new PresentationOptions()
+                {
+                    Dashboard = settings.VirtualDashboard,
+                    UnitPack = settings.UnitPack,
+                });
+                await navigation.Go<FlightReplayViewModel>(simulationUnit);
                 return simulationUnit;
             });
             
             isBusy = PlayCommand.IsExecuting.ToProperty(this, x => x.IsBusy);
         }
 
-        public ReactiveCommand<Unit, SimulationUnit> PlayCommand { get; }
+        public ReactiveCommand<Unit, Simulation> PlayCommand { get; }
 
 
         public bool IsBusy => isBusy.Value;

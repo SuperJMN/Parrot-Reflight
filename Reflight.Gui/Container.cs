@@ -1,10 +1,13 @@
-﻿using Windows.Storage;
+﻿using System;
+using Windows.Storage;
+using Windows.UI.Xaml;
 using Grace.DependencyInjection;
 using Parrot.FlightAcademy;
 using Reflight.Core;
 using Reflight.Gui.ViewModels;
 using Zafiro.Uwp.Core;
 using Zafiro.Uwp.Core.Filesystem;
+using Zafiro.Uwp.Core.Media;
 
 namespace Reflight.Gui
 {
@@ -22,10 +25,15 @@ namespace Reflight.Gui
                 x.ExportFactory(() => new UwpSettingsStore(typeof(SettingsViewModel).Name,
                     typeof(SettingsViewModel), ApplicationData.Current.RoamingSettings)).As<ISettingsStore>();
                 x.Export<Navigation>().As<INavigation>().Lifestyle.Singleton();
-                x.Export<MainViewModel>();
-                x.ExportFactory((SettingsViewModel s) => FlightAcademyClient.Create(s.Username, s.Password));
+                x.Export<UwpMediaPlayer>().As<IMediaPlayer>().Lifestyle.Singleton();
+                x.Export<VirtualDashboardRepository>().As<IVirtualDashboardRepository>().Lifestyle.Singleton();
+                x.Export<SettingsViewModel>().As<ISettings>().As<SettingsViewModel>();
 
-                x.ExcludeTypeFromAutoRegistration(typeof(SimulationUnit));
+                x.ExportFactory((SettingsViewModel s) => FlightAcademyClient.Create(s.Username, s.Password));
+                x.ExportFactory(() => new ResourceDictionary()
+                    {Source = new Uri("ms-appx:///Views/VirtualDashboards.xaml")});
+
+                x.ExcludeTypeFromAutoRegistration(typeof(Simulation));
             });
             
             Current = container;

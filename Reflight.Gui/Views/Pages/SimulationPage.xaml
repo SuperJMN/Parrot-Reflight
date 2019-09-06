@@ -7,10 +7,12 @@
     xmlns:viewModels="using:Reflight.Gui.ViewModels"
     xmlns:controls="using:Reflight.Gui.Views.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DataContext="{d:DesignInstance viewModels:SimulationViewModel}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+    RequestedTheme="Dark"
+    d:DataContext="{d:DesignInstance viewModels:FlightReplayViewModel}">
 
     <Grid>
-        <controls:FlightViewerControl x:Name="FlightViewer" />
+        <controls:FlightViewerControl x:Name="FlightViewer"  FlightReplayViewModel="{Binding}" />
         <Button Command="{Binding Close}" VerticalAlignment="Top" HorizontalAlignment="Right">
             <SymbolIcon Symbol="Cancel" />
         </Button>

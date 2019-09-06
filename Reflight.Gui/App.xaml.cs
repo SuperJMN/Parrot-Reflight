@@ -4,7 +4,6 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Reflight.Gui.Views;
 using Reflight.Gui.Views.Pages;
 
 namespace Reflight.Gui

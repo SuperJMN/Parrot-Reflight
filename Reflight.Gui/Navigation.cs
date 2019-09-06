@@ -5,7 +5,6 @@ using Windows.UI.Xaml.Controls;
 using ReactiveUI;
 using Reflight.Core;
 using Reflight.Gui.ViewModels;
-using Reflight.Gui.Views;
 using Reflight.Gui.Views.Pages;
 
 namespace Reflight.Gui
@@ -16,7 +15,7 @@ namespace Reflight.Gui
 
         readonly IDictionary<Type, Type> mappings = new Dictionary<Type, Type>()
         {
-            { typeof(SimulationViewModel), typeof(SimulationPage) }
+            { typeof(FlightReplayViewModel), typeof(SimulationPage) }
         };
 
         public Navigation()
