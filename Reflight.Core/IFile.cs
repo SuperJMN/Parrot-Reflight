@@ -11,5 +11,7 @@ namespace Reflight.Core
         Task<Instant?> GetStart();
         Task<Duration?> GetDuration();
         Task<Interval?> GetInterval();
+        Task<uint> GetFrameWidth();
+        Task<uint> GetFrameHeight();
     }
 }

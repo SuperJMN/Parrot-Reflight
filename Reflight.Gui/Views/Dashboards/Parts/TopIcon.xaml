@@ -11,9 +11,10 @@
 
     <UserControl.Resources>
         <converters:AngleRadianConverter x:Key="AngleRadianConverter" />
+        <converters:DroneModelConverter x:Key="DroneModelConverter"  DiscoValue="/Images/Drones/Disco/Top.png" AnafiValue="/Images/Drones/Anafi/Top.png" />
     </UserControl.Resources>
     <Grid Margin="20" >
-        <Image Source="/Images/Drones/Disco/Compass.png" />
+        <Image Source="/Images/Compass.png" />
         <Border RenderTransformOrigin="0.5,0.5" >
             <Border.RenderTransform>
                 <CompositeTransform
@@ -21,7 +22,7 @@
                     ScaleX="0.4" ScaleY="0.4"/>
             </Border.RenderTransform>
             <Border.Background>
-                <media:ImageBlendBrush Source="/Images/Drones/Disco/DiscoTop.png" Mode="Overlay" Stretch="Uniform" />
+                <media:ImageBlendBrush Source="{Binding DroneModel, Converter={StaticResource DroneModelConverter}}" Mode="Overlay" Stretch="Uniform" />
             </Border.Background>
         </Border>            
     </Grid>

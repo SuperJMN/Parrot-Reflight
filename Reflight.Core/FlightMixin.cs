@@ -11,11 +11,11 @@ namespace Reflight.Core
     {
         private static readonly TimeSpan TimeCorrection = TimeSpan.FromSeconds(-0.7);
 
-        public static Flight ToFlight(this FlightDetails data)
+        public static Flight ToFlight(this FlightDetails flightDetails)
         {
-            var dataProvider = new DataProvider(data.DetailsData, data.DetailsHeaders);
+            var dataProvider = new DataProvider(flightDetails.DetailsData, flightDetails.DetailsHeaders);
             var times = dataProvider.GetData<object, long>("time", Convert.ToInt64).ToList();
-            var altitude = dataProvider.GetData<object, long>("altitude", Convert.ToInt64).ToList();
+            var altitude = dataProvider.GetData<object, double>("altitude", Convert.ToDouble).ToList();
             var battLevel = dataProvider.GetData<object, int>("battery_level", Convert.ToInt32).ToList();
             var lat = dataProvider.GetData<object, double>("product_gps_latitude", Convert.ToDouble).ToList();
             var lng = dataProvider.GetData<object, double>("product_gps_longitude", Convert.ToDouble).ToList();
@@ -37,7 +37,7 @@ namespace Reflight.Core
                 {
                     TimeElapsed = TimeSpan.FromMilliseconds(times[i]).Add(TimeCorrection),
                     Speed = new Vector(spdX[i], spdY[i], spdZ[i]),
-                    Altitude = altitude[i] >= 0 ? altitude[i] / (double) 1000 : 0,
+                    Altitude = altitude[i] >= 0 ? altitude[i] : 0,
                     PitotSpeed = pitotSpeed.Any() ? pitotSpeed[i] : double.NaN, 
                     Longitude = lng[i],
                     Latitude = lat[i],
@@ -46,7 +46,7 @@ namespace Reflight.Core
                     AnglePsi = anglePsi[i],
                     BatteryLevel = battLevel[i] / 100D,
                     WifiStregth = wifiStrength[i],
-                    DronePosition = new GeoCoordinate(lat[i], lng[i], altitude[i] / 1000D),
+                    DronePosition = new GeoCoordinate(lat[i], lng[i], altitude[i]),
                     ControllerPosition = new GeoCoordinate(ctrlLat[i], ctrlLng[i], 0D),
                 })
                 .Buffer(2, 1)
@@ -79,9 +79,10 @@ namespace Reflight.Core
             var collection = statuses.ToEnumerable().ToList();
             return new Flight
             {
-                Date = data.Date,
-                RunTime = data.RunTime,
-                TotalRunTime = data.TotalRunTime,
+                Date = flightDetails.Date,
+                RunTime = flightDetails.RunTime,
+                TotalRunTime = flightDetails.TotalRunTime,
+                DroneModel = DroneModel.FromProductId(flightDetails.ProductId),
                 Statuses = collection,
             };
         }

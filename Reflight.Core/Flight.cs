@@ -9,5 +9,6 @@ namespace Reflight.Core
         public DateTimeOffset Date { get; set; }
         public TimeSpan RunTime { get; set; }
         public TimeSpan TotalRunTime { get; set; }
+        public DroneModel DroneModel { get; set; }
     }
 }

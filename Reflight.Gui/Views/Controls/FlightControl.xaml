@@ -7,23 +7,24 @@
     xmlns:viewModels1="using:Reflight.Gui.ViewModels"
     xmlns:viewSupport="using:Reflight.Gui.ViewSupport"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Reflight.Gui.ViewSupport.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels1:FlightViewModel}">
 
     <UserControl.Resources>
-        <viewSupport:DroneModelConverter x:Key="DroneModelTemplateSelector">
-            <viewSupport:DroneModelConverter.DiscoTemplate>
+        <converters:DroneModelTemplateSelector x:Key="DroneModelTemplateSelector">
+            <converters:DroneModelTemplateSelector.DiscoTemplate>
                 <DataTemplate>
                     <Image Source="/Images/Drones/Disco.png" />
                 </DataTemplate>
-            </viewSupport:DroneModelConverter.DiscoTemplate>
-            <viewSupport:DroneModelConverter.AnafiTemplate>
+            </converters:DroneModelTemplateSelector.DiscoTemplate>
+            <converters:DroneModelTemplateSelector.AnafiTemplate>
                 <DataTemplate>
                     <Image Source="/Images/Drones/Anafi.png" />
                 </DataTemplate>
-            </viewSupport:DroneModelConverter.AnafiTemplate>
-        </viewSupport:DroneModelConverter>
+            </converters:DroneModelTemplateSelector.AnafiTemplate>
+        </converters:DroneModelTemplateSelector>
     </UserControl.Resources>
     <controls:DockPanel Margin="10">
         

@@ -10,9 +10,11 @@
 
     <UserControl.Resources>
         <converters:AngleRadianConverter x:Key="AngleRadianConverter" />
+        <converters:DroneModelConverter x:Key="DroneModelConverter" DiscoValue="/Images/Drones/Disco/Side.png" AnafiValue="/Images/Drones/Anafi/Side.png" />
+
     </UserControl.Resources>
 
-    <Image Source="/Images/Drones/Disco/Side.svg" RenderTransformOrigin="0.5,0.5" >
+    <Image Source="{Binding DroneModel, Converter={StaticResource DroneModelConverter}}" RenderTransformOrigin="0.5,0.5" >
         <Image.RenderTransform>
             <CompositeTransform Rotation="{Binding Status.AngleTheta, Converter={StaticResource AngleRadianConverter}}" />
         </Image.RenderTransform>

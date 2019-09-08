@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Reflight.Gui.ViewModels
+namespace Reflight.Core
 {
     public class DroneModel
     {
         public int ProductId { get; }
         public string Name { get; }
+        public static DroneModel Disco => DroneModel.FromProductId(2318);
 
         static readonly IEnumerable<DroneModel> drones = new List<DroneModel>()
         {
@@ -21,7 +21,7 @@ namespace Reflight.Gui.ViewModels
             Name = name;
         }
 
-        public static DroneModel FromProductId(int productId)
+        public static DroneModel FromProductId(long productId)
         {
             return drones.First(x => x.ProductId == productId);
         }

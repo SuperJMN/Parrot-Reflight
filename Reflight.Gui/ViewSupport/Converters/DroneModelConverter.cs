@@ -1,29 +1,51 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Reflight.Gui.ViewModels;
+﻿using System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Reflight.Core;
 
-namespace Reflight.Gui.ViewSupport
+namespace Reflight.Gui.ViewSupport.Converters
 {
-    public class DroneModelConverter : DataTemplateSelector
+    public class DroneModelConverter : DependencyObject, IValueConverter
     {
-        protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (item is DroneModel dm)
+            if (value is DroneModel dm)
             {
-                switch (dm.Name)
+                if (dm.Name == "Anafi")
                 {
-                    case "Anafi":
-                        return AnafiTemplate;
-                    case "Disco":
-                        return DiscoTemplate;
+                    return AnafiValue;
+                }
+
+                if (dm.Name == "Disco")
+                {
+                    return DiscoValue;
                 }
             }
 
-            return base.SelectTemplateCore(item, container);
+            return null;
         }
 
-        public DataTemplate DiscoTemplate { get; set; }
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
 
-        public DataTemplate AnafiTemplate { get; set; }
+        public static readonly DependencyProperty AnafiValueProperty = DependencyProperty.Register(
+            "AnafiValue", typeof(object), typeof(DroneModelConverter), new PropertyMetadata(default(object)));
+
+        public object AnafiValue
+        {
+            get { return (object) GetValue(AnafiValueProperty); }
+            set { SetValue(AnafiValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty DiscoValueProperty = DependencyProperty.Register(
+            "DiscoValue", typeof(object), typeof(DroneModelConverter), new PropertyMetadata(default(object)));
+
+        public object DiscoValue
+        {
+            get { return (object) GetValue(DiscoValueProperty); }
+            set { SetValue(DiscoValueProperty, value); }
+        }
     }
 }

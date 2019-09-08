@@ -8,5 +8,6 @@ namespace Reflight.Core
         string Username { get; set; }
         UnitPack UnitPack { get; set; }
         VirtualDashboard VirtualDashboard { get; set; }
+        double DashboardScale { get; set; }
     }
 }

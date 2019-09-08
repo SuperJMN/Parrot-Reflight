@@ -88,6 +88,16 @@ namespace Reflight.Gui.ViewModels
             }
         }
 
+        public double DashboardScale
+        {
+            get => settingsStore.Get<double?>() ?? 1D;
+            set
+            {
+                settingsStore.Set(value);
+                this.RaisePropertyChanged();
+            }
+        }
+
         public IEnumerable<VirtualDashboard> VirtualDashboards => virtualDashboardRepository.GetAll();
 
         public void Dispose()

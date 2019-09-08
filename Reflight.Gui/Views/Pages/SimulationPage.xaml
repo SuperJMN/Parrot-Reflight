@@ -12,9 +12,34 @@
     d:DataContext="{d:DesignInstance viewModels:FlightReplayViewModel}">
 
     <Grid>
+        
         <controls:FlightViewerControl x:Name="FlightViewer"  FlightReplayViewModel="{Binding}" />
         <Button Command="{Binding Close}" VerticalAlignment="Top" HorizontalAlignment="Right">
             <SymbolIcon Symbol="Cancel" />
+        </Button>
+        <Button Background="Transparent" VerticalAlignment="Top">
+            <Button.Content>
+                <SymbolIcon Symbol="Setting" />
+            </Button.Content>
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <ComboBox Header="Scale" SelectedItem="{Binding Factor, Mode=TwoWay}">
+                            <ComboBox.Items>
+                                <x:Double>0.2</x:Double>
+                                <x:Double>0.3</x:Double>
+                                <x:Double>0.4</x:Double>
+                                <x:Double>0.5</x:Double>
+                                <x:Double>0.75</x:Double>
+                                <x:Double>1</x:Double>
+                                <x:Double>1.5</x:Double>
+                                <x:Double>2</x:Double>
+                                <x:Double>3</x:Double>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
         </Button>
     </Grid>
 </Page>

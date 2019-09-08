@@ -27,5 +27,6 @@ namespace Reflight.Gui.ViewModels
         public IPlottableViewModel Altitude { get; set; }
         public TimeSpan FlightDuration { get; }
         public TimeSpan CapturedDuration { get; }
+        public DroneModel DroneModel => DroneModel.Disco;
     }
 }

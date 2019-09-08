@@ -42,5 +42,6 @@ namespace Reflight.Gui.ViewModels
         public TimeSpan FlightDuration => simulation.Flight.RunTime;
         public TimeSpan CapturedDuration => simulation.Video.RecordedInterval.Value.Duration.ToTimeSpan();
         public StatusViewModel Status => status.Value;
+        public DroneModel DroneModel => simulation.Flight.DroneModel;
     }
 }

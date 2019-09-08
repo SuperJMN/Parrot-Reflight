@@ -18,6 +18,13 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>arm64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -124,14 +131,14 @@
     <Compile Include="Navigation.cs" />
     <Compile Include="NavigationFrameMessage.cs" />
     <Compile Include="ViewSupport\Converters\AngleRadianConverter.cs" />
+    <Compile Include="ViewSupport\Converters\DroneModelConverter.cs" />
     <Compile Include="ViewSupport\Converters\MeasurementUnitConverter.cs" />
     <Compile Include="ViewSupport\Converters\MeasurementUnitConverterCollection.cs" />
     <Compile Include="ViewSupport\Converters\MeasurementUnitConverterToFormattedString.cs" />
-    <Compile Include="ViewSupport\Dashboard.cs" />
     <Compile Include="ViewSupport\Converters\HumanizeDateConverter.cs" />
     <Compile Include="ViewSupport\Converters\HumanizeDurationConverter.cs" />
     <Compile Include="ViewSupport\Converters\HumanizeTimeSpanConverter.cs" />
-    <Compile Include="ViewSupport\Converters\DroneModelConverter.cs" />
+    <Compile Include="ViewSupport\Converters\DroneModelTemplateSelector.cs" />
     <Compile Include="ViewSupport\Converters\SimulationViewModelToDataTemplateConverter.cs" />
     <Compile Include="ViewSupport\Converters\VideoSizeConverter.cs" />
     <Compile Include="Views\Controls\FlightViewerControl.xaml.cs">
@@ -221,11 +228,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Drones\Anafi\Back.png" />
+    <Content Include="Images\Drones\Anafi\Side.png" />
+    <Content Include="Images\Drones\Anafi\Top.png" />
     <Content Include="Images\Drones\Disco.png" />
     <Content Include="Images\Drones\Anafi.png" />
     <Content Include="Images\Drones\Disco\Back.svg" />
-    <Content Include="Images\Drones\Disco\DiscoTop.png" />
-    <Content Include="Images\Drones\Disco\Compass.png" />
+    <Content Include="Images\Drones\Disco\Top.png" />
+    <Content Include="Images\Compass.png" />
     <Content Include="Images\Drones\Disco\Side.svg" />
     <Content Include="Images\Video.png" />
     <Content Include="Properties\Default.rd.xml" />

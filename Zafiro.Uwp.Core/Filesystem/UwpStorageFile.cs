@@ -52,11 +52,23 @@ namespace Zafiro.Uwp.Core.Filesystem
             return null;
         }
 
+        public Task<uint> GetFrameWidth()
+        {
+            return storageFile.GetProperty<uint>(FrameWidth);
+        }
+
+        public Task<uint> GetFrameHeight()
+        {
+            return storageFile.GetProperty<uint>(FrameHeight);
+        }
+
         public Task<T> GetProperty<T>(string name)
         {
             return storageFile.GetProperty<T>(name);
         }
 
+        public string FrameWidth => "System.Video.FrameWidth";
+        public string FrameHeight => "System.Video.FrameHeight";
         public string DateEncoded => "System.Media.DateEncoded";
         public string Duration => "System.Media.Duration";
     }
