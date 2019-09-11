@@ -127,7 +127,6 @@
     <Compile Include="Controls\ControlHelpers.cs" />
     <Compile Include="DefaultSettingValueAttribute.cs" />
     <Compile Include="Filesystem\UwpFileSystem.cs" />
-    <Compile Include="Filesystem\UwpMetadata.cs" />
     <Compile Include="Filesystem\UwpStorageFile.cs" />
     <Compile Include="Media\IMediaPlayerAdapterInjector.cs" />
     <Compile Include="Media\InjectMediaPlayerBehavior.cs" />

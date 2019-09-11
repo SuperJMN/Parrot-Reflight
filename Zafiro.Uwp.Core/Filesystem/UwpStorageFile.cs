@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using NodaTime;
@@ -26,12 +27,36 @@ namespace Zafiro.Uwp.Core.Filesystem
         public async Task<Instant?> GetStart()
         {
             var dateEncoded = await GetProperty<DateTimeOffset?>(DateEncoded);
-            return dateEncoded?.ToInstant();
+            
+            if (dateEncoded.HasValue)
+            {
+                var originalDate = dateEncoded.Value;
+                var isDisco = await GetIsDisco(storageFile);
+                var date = GetCorrectDate(originalDate, isDisco);
+                return date.ToInstant();
+            }
+
+            return null;
+        }
+
+        private async Task<bool> GetIsDisco(StorageFile file)
+        {
+            var author = await file.GetProperty<string[]>("System.Author");
+            var isDisco = author != null && author.Any(x => x.Contains("DISCO", StringComparison.CurrentCultureIgnoreCase));
+            return isDisco;
+        }
+
+        private static DateTimeOffset GetCorrectDate(DateTimeOffset date, bool isDisco)
+        {
+            var discoCorrectedDate = date.Add(date.Offset.Negate());
+            var dto = isDisco ? discoCorrectedDate : date;
+            return dto;
         }
 
         public async Task<Duration?> GetDuration()
         {
             var encodedDuration = await storageFile.GetProperty<ulong?>(Duration);
+            
             if (encodedDuration.HasValue)
             {
                 return TimeSpan.FromMilliseconds(0.0001 * encodedDuration.Value).ToDuration();
@@ -44,6 +69,7 @@ namespace Zafiro.Uwp.Core.Filesystem
         {
             var duration = await GetDuration();
             var start = await GetStart();
+            
             if (duration.HasValue && start.HasValue)
             {
                 return new Interval(start.Value, start.Value.Plus(duration.Value));

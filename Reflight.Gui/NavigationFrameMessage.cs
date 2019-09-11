@@ -4,11 +4,13 @@ namespace Reflight.Gui
 {
     internal class NavigationFrameMessage
     {
-        public Frame Frame { get; }
+        public Frame MainFrame { get; }
+        public Frame InnerFrame { get; }
 
-        public NavigationFrameMessage(Frame frame)
+        public NavigationFrameMessage(Frame mainFrame, Frame innerFrame)
         {
-            Frame = frame;
+            MainFrame = mainFrame;
+            InnerFrame = innerFrame;
         }
     }
 }

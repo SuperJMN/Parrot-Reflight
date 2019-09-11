@@ -4,20 +4,67 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Reflight.Gui.Views.Controls"
-    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:settings="using:Reflight.Gui.Views.Settings"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:viewModels="using:Reflight.Gui.ViewModels"
+    xmlns:gui="using:Reflight.Gui"
+    xmlns:converters="using:Reflight.Gui.ViewSupport.Converters"
+    xmlns:reactive="using:System.Reactive"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+
+    <Page.Resources>
+        <converters:SectionIconConverter x:Key="SectionIconConverter" />
+        <gui:SectionConverter x:Key="ItemConverter" />
+
+    </Page.Resources>
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding GoToGallery}" >
+            </core:InvokeCommandAction>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <controls1:Expander Header="Settings">
-            <settings:Settings />
-        </controls1:Expander>
-        <controls:FlightBrowser Grid.Row="1" />
+        <NavigationView MenuItemsSource="{Binding Sections}" IsBackEnabled="{Binding CanGoBack}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" PaneTitle="Parrot">
+
+            
+            
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="viewModels:Section">
+                    <Grid Height="40" HorizontalAlignment="Left" ToolTipService.ToolTip="{Binding Name}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="IconColumn" Width="48" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Viewbox Child="{Binding Converter={StaticResource SectionIconConverter}}" Margin="-32,12,0,12" />
+                        <TextBlock Grid.Column="1" Margin="-16,12,16,12" Text="{Binding Name}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="ItemInvoked">
+                    <core:EventTriggerBehavior.Actions>
+                        <core:InvokeCommandAction Command="{Binding ItemInvoked}"
+                                                  InputConverter="{StaticResource ItemConverter}" />
+                    </core:EventTriggerBehavior.Actions>
+                </core:EventTriggerBehavior>
+                <core:EventTriggerBehavior EventName="BackRequested">
+                    <core:EventTriggerBehavior.Actions>
+                        <core:InvokeCommandAction Command="{Binding GoBack}"
+                                                  InputConverter="{StaticResource ItemConverter}" />
+                    </core:EventTriggerBehavior.Actions>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+
+            <Frame x:Name="InnerFrame" />
+
+        </NavigationView>
+        <ContentControl x:Name="ContentControl" />
     </Grid>
 </Page>

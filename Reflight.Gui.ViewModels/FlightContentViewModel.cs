@@ -32,7 +32,8 @@ namespace Reflight.Gui.ViewModels
                     Dashboard = settings.VirtualDashboard,
                     UnitPack = settings.UnitPack,
                 });
-                await navigation.Go<FlightReplayViewModel>(simulationUnit);
+
+                await navigation.Go<FlightReplayViewModel>(new { simulationUnit, isExpanded = false });
                 return simulationUnit;
             });
             

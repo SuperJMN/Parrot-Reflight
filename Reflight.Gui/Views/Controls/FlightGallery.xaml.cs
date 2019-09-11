@@ -4,9 +4,9 @@
 
 namespace Reflight.Gui.Views.Controls
 {
-    public sealed partial class FlightBrowser : UserControl
+    public sealed partial class FlightGallery : UserControl
     {
-        public FlightBrowser()
+        public FlightGallery()
         {
             this.InitializeComponent();
         }

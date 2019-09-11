@@ -20,7 +20,8 @@ namespace Reflight.Gui.Views.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             DataContext = Container.Current.Locate<MainViewModel>();
-            ReactiveUI.MessageBus.Current.SendMessage(new NavigationFrameMessage((Frame) Window.Current.Content));
+            var message = new NavigationFrameMessage(this.Frame, this.InnerFrame);
+            ReactiveUI.MessageBus.Current.SendMessage(message);
         }
     }
 }

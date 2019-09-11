@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <converters:AngleRadianConverter x:Key="AngleRadianConverter" />
-        <converters:DroneModelConverter x:Key="DroneModelConverter" DiscoValue="/Images/Drones/Disco/Side.png" AnafiValue="/Images/Drones/Anafi/Side.png" />
+        <converters:DroneModelConverter x:Key="DroneModelConverter" DiscoValue="/Images/Drones/Disco/Pitch.png" AnafiValue="/Images/Drones/Anafi/Pitch.png" />
 
     </UserControl.Resources>
 

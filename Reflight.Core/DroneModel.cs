@@ -8,8 +8,9 @@ namespace Reflight.Core
         public int ProductId { get; }
         public string Name { get; }
         public static DroneModel Disco => DroneModel.FromProductId(2318);
+        public static DroneModel Anafi => DroneModel.FromProductId(2324);
 
-        static readonly IEnumerable<DroneModel> drones = new List<DroneModel>()
+        static readonly IEnumerable<DroneModel> Drones = new List<DroneModel>()
         {
             new DroneModel(2324, "Anafi"),
             new DroneModel(2318, "Disco"),
@@ -23,7 +24,7 @@ namespace Reflight.Core
 
         public static DroneModel FromProductId(long productId)
         {
-            return drones.First(x => x.ProductId == productId);
+            return Drones.First(x => x.ProductId == productId);
         }
     }
 }

@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <converters:AngleRadianConverter x:Key="AngleRadianConverter" />
-        <converters:DroneModelConverter x:Key="DroneModelConverter" DiscoValue="/Images/Drones/Disco/Back.png" AnafiValue="/Images/Drones/Anafi/Back.png" />
+        <converters:DroneModelConverter x:Key="DroneModelConverter" DiscoValue="/Images/Drones/Disco/Roll.png" AnafiValue="/Images/Drones/Anafi/Roll.png" />
     </UserControl.Resources>
 
     <Image Source="{Binding DroneModel, Converter={StaticResource DroneModelConverter}}" RenderTransformOrigin="0.5,0.5" >

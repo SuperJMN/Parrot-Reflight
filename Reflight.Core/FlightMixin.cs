@@ -13,6 +13,8 @@ namespace Reflight.Core
 
         public static Flight ToFlight(this FlightDetails flightDetails)
         {
+            var droneModel = DroneModel.FromProductId(flightDetails.ProductId);
+
             var dataProvider = new DataProvider(flightDetails.DetailsData, flightDetails.DetailsHeaders);
             var times = dataProvider.GetData<object, long>("time", Convert.ToInt64).ToList();
             var altitude = dataProvider.GetData<object, double>("altitude", Convert.ToDouble).ToList();
@@ -37,7 +39,7 @@ namespace Reflight.Core
                 {
                     TimeElapsed = TimeSpan.FromMilliseconds(times[i]).Add(TimeCorrection),
                     Speed = new Vector(spdX[i], spdY[i], spdZ[i]),
-                    Altitude = altitude[i] >= 0 ? altitude[i] : 0,
+                    Altitude = altitude[i] >= 0 ? GetAltitude(altitude[i], droneModel) : 0,
                     PitotSpeed = pitotSpeed.Any() ? pitotSpeed[i] : double.NaN, 
                     Longitude = lng[i],
                     Latitude = lat[i],
@@ -46,7 +48,7 @@ namespace Reflight.Core
                     AnglePsi = anglePsi[i],
                     BatteryLevel = battLevel[i] / 100D,
                     WifiStregth = wifiStrength[i],
-                    DronePosition = new GeoCoordinate(lat[i], lng[i], altitude[i]),
+                    DronePosition = new GeoCoordinate(lat[i], lng[i], GetAltitude(altitude[i], droneModel)),
                     ControllerPosition = new GeoCoordinate(ctrlLat[i], ctrlLng[i], 0D),
                 })
                 .Buffer(2, 1)
@@ -77,14 +79,25 @@ namespace Reflight.Core
                 });
 
             var collection = statuses.ToEnumerable().ToList();
+            
             return new Flight
             {
                 Date = flightDetails.Date,
                 RunTime = flightDetails.RunTime,
                 TotalRunTime = flightDetails.TotalRunTime,
-                DroneModel = DroneModel.FromProductId(flightDetails.ProductId),
+                DroneModel = droneModel,
                 Statuses = collection,
             };
+        }
+
+        private static double GetAltitude(double rawValue, DroneModel droneModel)
+        {
+            if (droneModel == DroneModel.Disco)
+            {
+                return rawValue / 1000D;
+            }
+
+            return rawValue;
         }
 
         private static bool IsValidGpsCoord(double d)

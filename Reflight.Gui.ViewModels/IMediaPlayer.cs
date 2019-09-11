@@ -7,5 +7,6 @@ namespace Reflight.Gui.ViewModels
         void Play();
         void Pause();
         IObservable<TimeSpan> Position { get; }
+        void SetPosition(TimeSpan timeSpan);
     }
 }

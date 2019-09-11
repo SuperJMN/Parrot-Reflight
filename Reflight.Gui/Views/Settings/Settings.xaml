@@ -12,14 +12,14 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <controls:TabView Grid.Row="1" HorizontalContentAlignment="Stretch">
+    <controls:TabView HorizontalContentAlignment="Stretch">
 
         <controls:TabViewItem Header="General">
-            <controls1:GeneralSettings />
+            <controls1:GeneralSettings Margin="10" />
         </controls:TabViewItem>
 
         <controls:TabViewItem Header="Virtual Dashboard">
-            <settings:VirtualDashboards />
+            <settings:VirtualDashboards Margin="10" />
         </controls:TabViewItem>
 
     </controls:TabView>

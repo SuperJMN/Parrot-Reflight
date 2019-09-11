@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Parrot.FlightAcademy;
 using ReactiveUI;
 using Reflight.Core;
 
@@ -12,37 +9,55 @@ namespace Reflight.Gui.ViewModels
 {
     public class MainViewModel : ReactiveObject
     {
-        private readonly IViewModelFactory viewModelFactory;
-        private readonly ObservableAsPropertyHelper<IList<FlightViewModel>> flights;
-        private readonly ObservableAsPropertyHelper<bool> isBusy;
+        private readonly INavigation navigation;
+        private readonly ObservableAsPropertyHelper<bool> canGoBack;
 
-        public MainViewModel(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory, IMediaStore mediaStore, IViewModelFactory viewModelFactory)
+        public MainViewModel(INavigation navigation)
         {
-            this.viewModelFactory = viewModelFactory;
-            LoadFlights = ReactiveCommand.CreateFromTask(() => LoadFlightsAsync(flightAcademyClientFactory, mediaStore));
-            LoadFlights.ThrownExceptions.Subscribe(exception => { });
-            flights = LoadFlights.ToProperty(this, x => x.Flights);
-            isBusy = LoadFlights.IsExecuting.ToProperty(this, x => x.IsBusy);
+            this.navigation = navigation;
+            GoToGallery = ReactiveCommand.CreateFromTask((object _) => navigation.Go<FlightGalleryViewModel>());
+            ItemInvoked = ReactiveCommand.Create<Section>(NavigateTo);
+            Sections = new List<Section>
+            {
+                new Section("Gallery"),
+                new Section("About"),
+                new Section("Donation"),
+            };
+
+            canGoBack = navigation.CanGoBack.ToProperty(this, x => x.CanGoBack);
+            GoBack = ReactiveCommand.Create(navigation.GoBack);
+            SelectedItem = Sections.First();
         }
 
-        private async Task<IList<FlightViewModel>> LoadFlightsAsync(Func<Task<IFlightAcademyClient>> flightAcademyClientFactory,
-            IMediaStore mediaMatcher)
+        public ReactiveCommand<Unit, Task> GoBack { get; }
+
+        private void NavigateTo(Section s)
         {
-            var flightAcademyClient = await flightAcademyClientFactory();
-            var observable = Observable
-                .FromAsync(() => flightAcademyClient.GetFlights(0, 1500))
-                .Select(x => x.ToObservable().SelectMany(summary => viewModelFactory.CreateFlightViewModel(summary)).ToList());
-            var observable1 = await observable;
-            var flightViewModels = await observable1;
-            return flightViewModels;
+            switch (s.Name)
+            {
+                case "Gallery":
+                    navigation.Go<FlightGalleryViewModel>();
+                    break;
+                case "About":
+                    navigation.Go<AboutViewModel>();
+                    break;
+                case "Donation":
+                    navigation.Go<DonationViewModel>();
+                    break;
+                case "Settings":
+                    navigation.Go<SettingsViewModel>();
+                    break;
+            }
         }
 
-        public IList<FlightViewModel> Flights => flights.Value;
+        public ReactiveCommand<Section, Unit> ItemInvoked { get; set; }
 
-        public ReactiveCommand<Unit, IList<FlightViewModel>> LoadFlights { get; }
+        public ReactiveCommand<object, Unit> GoToGallery { get; }
 
-        public FlightViewModel SelectedFlight { get; set; }
+        public IEnumerable<Section> Sections { get; }
 
-        public bool IsBusy => isBusy.Value;
+        public bool CanGoBack => canGoBack.Value;
+
+        public object SelectedItem { get; set; }
     }
 }

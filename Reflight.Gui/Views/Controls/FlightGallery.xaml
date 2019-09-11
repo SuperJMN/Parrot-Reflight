@@ -1,8 +1,7 @@
 ﻿<UserControl
-    x:Class="Reflight.Gui.Views.Controls.FlightBrowser"
+    x:Class="Reflight.Gui.Views.Controls.FlightGallery"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Reflight.Gui.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
@@ -12,13 +11,15 @@
     xmlns:controls1="using:Reflight.Gui.Views.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:FlightGalleryViewModel}">
 
     <Grid>
         <controls:MasterDetailsView ItemsSource="{Binding Flights}"
-                                    SelectedItem="{Binding SelectedFlight, Mode=TwoWay}"
-                                    NoSelectionContent="Please, choose a flight">
+                                    SelectedItem="{Binding SelectedFlight, Mode=TwoWay}">
 
+            <controls:MasterDetailsView.NoSelectionContent>
+                <TextBlock Margin="10">Please, choose a flight. To do it, click on the "Load Flights" button</TextBlock>
+            </controls:MasterDetailsView.NoSelectionContent>
             <controls:MasterDetailsView.MasterHeader>
                 <StackPanel Spacing="10">
                     <TextBlock Text="Flights" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>

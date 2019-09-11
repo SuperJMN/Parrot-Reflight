@@ -24,7 +24,7 @@
                 <ResourceDictionary Source="Views/VirtualDashboards.xaml" />
             </viewSupport:SimulationViewModelToDataTemplateConverter.ResourceDictionary>
         </viewSupport:SimulationViewModelToDataTemplateConverter>
-        <gui:MyConverter x:Key="MyConverter" />
+        <gui:PathToStorageFileConverter x:Key="MyConverter" />
 
     </Application.Resources>
 
