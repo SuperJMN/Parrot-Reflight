@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -25,6 +26,16 @@ namespace Parrot.FlightAcademy
 
         private static async Task<IFlightAcademyClient> CreateInner(string identifier, string password, Uri uri)
         {
+            if (identifier == null)
+            {
+                throw new InvalidCredentialException(nameof(identifier));
+            }
+
+            if (password == null)
+            {
+                throw new InvalidCredentialException(nameof(password));
+            }
+
             var httpClientHandler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,

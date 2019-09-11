@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Reflight.Core;
 
 namespace Zafiro.Uwp.Core
@@ -63,6 +65,21 @@ namespace Zafiro.Uwp.Core
             }
 
             return default(T);
+        }
+    }
+
+    public class DialogService : IDialogService
+    {
+        public Task ShowError(string title, string message)
+        {
+            var dialog = new MessageDialog(message) { Title = title };
+            return dialog.ShowAsync().AsTask();
+        }
+
+        public Task ShowMessage(string message)
+        {
+            var dialog = new MessageDialog(message);
+            return dialog.ShowAsync().AsTask();
         }
     }
 }

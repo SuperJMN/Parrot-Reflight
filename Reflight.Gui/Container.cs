@@ -19,6 +19,7 @@ namespace Reflight.Gui
             container.Configure(x =>
             {
                 x.Export<UwpFileSystem>().As<IFileSystem>();
+                x.Export<DialogService>().As<IDialogService>();
                 x.Export<MediaStore>().As<IMediaStore>();
                 x.Export<UwpAccesibleFolders>().As<IAccesibleFolders>();
                 x.Export<ViewModelFactory>().As<IViewModelFactory>();
