@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
-using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using Reflight.Core;
 
 namespace Zafiro.Uwp.Core.Controls
 {

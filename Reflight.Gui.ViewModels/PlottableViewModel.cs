@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ReactiveUI;
+using Reflight.Core;
 
 namespace Reflight.Gui.ViewModels
 {

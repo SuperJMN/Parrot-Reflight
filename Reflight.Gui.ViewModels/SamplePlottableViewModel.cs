@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Reflight.Core;
 
 namespace Reflight.Gui.ViewModels
 {

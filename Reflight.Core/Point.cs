@@ -1,4 +1,4 @@
-﻿namespace Reflight.Gui.ViewModels
+﻿namespace Reflight.Core
 {
     public class Point
     {
