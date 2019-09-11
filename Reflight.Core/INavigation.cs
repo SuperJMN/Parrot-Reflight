@@ -8,6 +8,5 @@ namespace Reflight.Core
         Task Go<T>(object parameter = null);
         Task GoBack();
         IObservable<bool> CanGoBack { get; }
-        Task GoExpanded<T>(object parameter = null);
     }
 }

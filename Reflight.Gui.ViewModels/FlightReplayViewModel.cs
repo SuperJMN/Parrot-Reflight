@@ -28,7 +28,7 @@ namespace Reflight.Gui.ViewModels
             width = this.WhenAnyValue(x => x.Scale).Select(x => 1/x * ratio * BaseSize).ToProperty(this, x => x.Width);
             height = this.WhenAnyValue(x => x.Scale).Select(x => 1/x * BaseSize).ToProperty(this, x => x.Height);
             Play = ReactiveCommand.Create(() => MediaPlayer.Play());
-            Expand = ReactiveCommand.CreateFromTask(() => navigation.GoExpanded<FlightReplayViewModel>(new {simulation, isExpanded = true }), Observable.Return(!isExpanded));
+            Expand = ReactiveCommand.CreateFromTask(() => navigation.Go<FlightReplayViewModel>(new {simulation, isExpanded = true }), Observable.Return(!isExpanded));
             Expand.Subscribe(_ => IsExpanded = true);
             GoBack = ReactiveCommand.CreateFromTask(navigation.GoBack);
         }
