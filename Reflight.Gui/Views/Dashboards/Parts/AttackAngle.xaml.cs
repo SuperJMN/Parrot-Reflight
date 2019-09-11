@@ -5,7 +5,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 
 // The Blank UserControl item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace ParrotDiscoReflight.Views.Dashboards.Parts
+namespace Reflight.Gui.Views.Dashboards.Parts
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

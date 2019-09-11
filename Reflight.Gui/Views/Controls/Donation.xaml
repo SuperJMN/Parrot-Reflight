@@ -10,16 +10,23 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <controls:DockPanel Margin="10">
-        <Button controls:DockPanel.Dock="Bottom" HorizontalAlignment="Center" Content="PayPal donate" Tapped="DonateOnTap" />
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
         <RichTextBlock>
             <Paragraph>
-                <Run>This application is proudly developed by José Manuel Nieto (JMN)</Run>
-                <Run>Please, support my work donating any amount using the Donate below</Run>
+                <Run>This application is proudly developed by José Manuel Nieto (JMN) for the Parrot Community</Run>
+                <Run>Please, support my work donating any amount using the Donate below.</Run>
             </Paragraph>
             <Paragraph FontWeight="Bold" Margin="0 10">
                 Thank you very much!
             </Paragraph>
         </RichTextBlock>
-    </controls:DockPanel>
+
+        <Button Grid.Row="1" controls:DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Center" Content="PayPal donate" Tapped="DonateOnTap" />
+        
+    </Grid>
 </UserControl>

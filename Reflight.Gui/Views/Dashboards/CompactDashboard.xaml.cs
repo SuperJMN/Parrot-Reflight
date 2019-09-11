@@ -1,4 +1,4 @@
-﻿namespace ParrotDiscoReflight.Views.Dashboards
+﻿namespace Reflight.Gui.Views.Dashboards
 {
     public sealed partial class CompactDashboard
     {

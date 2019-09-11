@@ -27,10 +27,8 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid>
-        <NavigationView MenuItemsSource="{Binding Sections}" IsBackEnabled="{Binding CanGoBack}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" PaneTitle="Parrot">
+        <NavigationView OpenPaneLength="160" IsBackButtonVisible="Collapsed" MenuItemsSource="{Binding Sections}" IsBackEnabled="{Binding CanGoBack}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 
-            
-            
             <NavigationView.MenuItemTemplate>
                 <DataTemplate x:DataType="viewModels:Section">
                     <Grid Height="40" HorizontalAlignment="Left" ToolTipService.ToolTip="{Binding Name}">

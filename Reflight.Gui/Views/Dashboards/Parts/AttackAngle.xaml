@@ -1,12 +1,13 @@
 ﻿<UserControl
-    x:Class="ParrotDiscoReflight.Views.Dashboards.Parts.AttackAngle"
+    x:Class="Reflight.Gui.Views.Dashboards.Parts.AttackAngle"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:code="using:ParrotDiscoReflight.Code"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance code:ISimulationViewModel}">
+    xmlns:viewModels="using:Reflight.Gui.ViewModels"
+    xmlns:converters="using:Reflight.Gui.ViewSupport.Converters"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ISimulationViewModel}">
     <UserControl.Resources>
         <Style x:Key="ProgressBarStyle1" TargetType="ProgressBar">
             <Setter Property="Foreground" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
@@ -303,6 +304,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <converters:AngleRadianConverter x:Key="AngleRadianConverter" />
     </UserControl.Resources>
 
     <controls:LayoutTransformControl>

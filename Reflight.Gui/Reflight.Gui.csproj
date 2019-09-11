@@ -156,14 +156,26 @@
     <Compile Include="Views\Controls\SimulationControl.xaml.cs">
       <DependentUpon>SimulationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dashboards\CompactDashboard.xaml.cs">
+      <DependentUpon>CompactDashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboards\OriginalDashboard.xaml.cs">
       <DependentUpon>OriginalDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboards\OriginalWithGraphs.xaml.cs">
+      <DependentUpon>OriginalWithGraphs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboards\Parts\AltitudeGauge.xaml.cs">
       <DependentUpon>AltitudeGauge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dashboards\Parts\AltitudeGraph.xaml.cs">
+      <DependentUpon>AltitudeGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboards\Parts\AltitudeIndicator.xaml.cs">
       <DependentUpon>AltitudeIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboards\Parts\AttackAngle.xaml.cs">
+      <DependentUpon>AttackAngle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboards\Parts\BackIcon.xaml.cs">
       <DependentUpon>BackIcon.xaml</DependentUpon>
@@ -177,6 +189,9 @@
     <Compile Include="Views\Dashboards\Parts\FlightDistanceIndicator.xaml.cs">
       <DependentUpon>FlightDistanceIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dashboards\Parts\Guides.xaml.cs">
+      <DependentUpon>Guides.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboards\Parts\MaxAltitudeIndicator.xaml.cs">
       <DependentUpon>MaxAltitudeIndicator.xaml</DependentUpon>
     </Compile>
@@ -188,6 +203,9 @@
     </Compile>
     <Compile Include="Views\Dashboards\Parts\SpeedGauge.xaml.cs">
       <DependentUpon>SpeedGauge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboards\Parts\SpeedGraph.xaml.cs">
+      <DependentUpon>SpeedGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboards\Parts\SpeedIndicator.xaml.cs">
       <DependentUpon>SpeedIndicator.xaml</DependentUpon>
@@ -204,8 +222,8 @@
     <Compile Include="Views\Dashboards\Parts\WindSpeedIndicator.xaml.cs">
       <DependentUpon>WindSpeedIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dashboards\SampleDashboard.xaml.cs">
-      <DependentUpon>SampleDashboard.xaml</DependentUpon>
+    <Compile Include="Views\Dashboards\StandardDashboard.xaml.cs">
+      <DependentUpon>StandardDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -330,7 +348,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dashboards\CompactDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Dashboards\OriginalDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dashboards\OriginalWithGraphs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -338,7 +364,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dashboards\Parts\AltitudeGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Dashboards\Parts\AltitudeIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dashboards\Parts\AttackAngle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -362,6 +396,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dashboards\Parts\Guides.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Dashboards\Parts\MaxAltitudeIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -377,6 +415,10 @@
     <Page Include="Views\Dashboards\Parts\SpeedGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dashboards\Parts\SpeedGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dashboards\Parts\SpeedIndicator.xaml">
       <SubType>Designer</SubType>
@@ -398,9 +440,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Dashboards\SampleDashboard.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\Dashboards\StandardDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>

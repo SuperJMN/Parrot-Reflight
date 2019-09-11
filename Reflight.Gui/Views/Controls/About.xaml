@@ -14,13 +14,12 @@
         <RichTextBlock>
             <Paragraph>
                 <Run>If you are a developer and want to collaborate with the project, feel free to take a look to the project site in GitHub</Run>
-                <Run>Visit</Run>
             </Paragraph>
           
             <Paragraph Margin="0 10">
-                <Hyperlink Click="Hyperlink_OnClick">Parrot Reflight</Hyperlink>
-                <Run>now!</Run>
+                Visit <Hyperlink Click="Hyperlink_OnClick">Parrot Reflight</Hyperlink>'s project site now!
             </Paragraph>
+
         </RichTextBlock>
     </controls:DockPanel>
 </UserControl>

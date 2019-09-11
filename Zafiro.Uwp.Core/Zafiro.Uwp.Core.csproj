@@ -125,6 +125,13 @@
     <Compile Include="Bitmaps\StorageFileToBitmapConverter.cs" />
     <Compile Include="Controls\AnimatedRadialGauge.cs" />
     <Compile Include="Controls\ControlHelpers.cs" />
+    <Compile Include="Controls\LineGraph.xaml.cs">
+      <DependentUpon>LineGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Plotter.xaml.cs">
+      <DependentUpon>Plotter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Renderer.cs" />
     <Compile Include="DefaultSettingValueAttribute.cs" />
     <Compile Include="Filesystem\UwpFileSystem.cs" />
     <Compile Include="Filesystem\UwpStorageFile.cs" />
@@ -163,7 +170,16 @@
       <Name>Reflight.Gui.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Controls\LineGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Plotter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
