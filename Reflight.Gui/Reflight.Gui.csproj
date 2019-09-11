@@ -140,7 +140,6 @@
     <Compile Include="ViewSupport\Converters\HumanizeDateConverter.cs" />
     <Compile Include="ViewSupport\Converters\HumanizeDurationConverter.cs" />
     <Compile Include="ViewSupport\Converters\HumanizeTimeSpanConverter.cs" />
-    <Compile Include="ViewSupport\Converters\DroneModelTemplateSelector.cs" />
     <Compile Include="ViewSupport\Converters\SimulationViewModelToDataTemplateConverter.cs" />
     <Compile Include="ViewSupport\Converters\VideoSizeConverter.cs" />
     <Compile Include="Views\Controls\About.xaml.cs">

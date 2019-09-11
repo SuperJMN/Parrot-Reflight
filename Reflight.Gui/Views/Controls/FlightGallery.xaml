@@ -14,12 +14,17 @@
     d:DesignWidth="400" d:DataContext="{d:DesignInstance viewModels:FlightGalleryViewModel}">
 
     <Grid>
-        <controls:MasterDetailsView ItemsSource="{Binding Flights}"
+        <controls:MasterDetailsView ItemsSource="{Binding Flights}" MasterPaneWidth="280"
                                     SelectedItem="{Binding SelectedFlight, Mode=TwoWay}">
 
             <controls:MasterDetailsView.NoSelectionContent>
                 <TextBlock Margin="10">Please, choose a flight. To do it, click on the "Load Flights" button</TextBlock>
             </controls:MasterDetailsView.NoSelectionContent>
+            <controls:MasterDetailsView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </controls:MasterDetailsView.ItemContainerStyle>
             <controls:MasterDetailsView.MasterHeader>
                 <StackPanel Spacing="10">
                     <TextBlock Text="Flights" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>

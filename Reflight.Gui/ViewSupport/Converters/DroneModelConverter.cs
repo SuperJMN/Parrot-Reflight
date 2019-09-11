@@ -31,20 +31,20 @@ namespace Reflight.Gui.ViewSupport.Converters
         }
 
         public static readonly DependencyProperty AnafiValueProperty = DependencyProperty.Register(
-            "AnafiValue", typeof(object), typeof(DroneModelConverter), new PropertyMetadata(default(object)));
+            "AnafiValue", typeof(Uri), typeof(DroneModelConverter), new PropertyMetadata(default(Uri)));
 
-        public object AnafiValue
+        public Uri AnafiValue
         {
-            get { return (object) GetValue(AnafiValueProperty); }
+            get { return (Uri) GetValue(AnafiValueProperty); }
             set { SetValue(AnafiValueProperty, value); }
         }
 
         public static readonly DependencyProperty DiscoValueProperty = DependencyProperty.Register(
-            "DiscoValue", typeof(object), typeof(DroneModelConverter), new PropertyMetadata(default(object)));
+            "DiscoValue", typeof(Uri), typeof(DroneModelConverter), new PropertyMetadata(default(Uri)));
 
-        public object DiscoValue
+        public Uri DiscoValue
         {
-            get { return (object) GetValue(DiscoValueProperty); }
+            get { return (Uri) GetValue(DiscoValueProperty); }
             set { SetValue(DiscoValueProperty, value); }
         }
     }
