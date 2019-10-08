@@ -29,7 +29,7 @@
     <PackageCertificateKeyFile />
     <PackageCertificatePassword />
     <Use64Bitcompiler>true</Use64Bitcompiler>
-    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -489,7 +489,7 @@
       <Version>7.0.0</Version>
     </PackageReference>
     <PackageReference Include="Humanizer">
-      <Version>2.7.2</Version>
+      <Version>2.7.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
